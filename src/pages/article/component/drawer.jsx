@@ -1,8 +1,18 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { Box, Drawer, Button, List, Divider, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { Inbox as InboxIcon, Mail as MailIcon, Menu as MenuIcon } from '@mui/icons-material';
 import Pagination from '@mui/material/Pagination';
 import ArticleSearch from './articleSearch';
+
+
+//서버에서 데이터를 가져오는 함수
+async function getRevies() {
+  const response = await fetch(url); //url지정해야함
+  const body = await response.json();
+  return body;
+}
+
 
 export default function TemporaryDrawer() {
   const [open, setOpen] = React.useState(false);
@@ -10,8 +20,12 @@ export default function TemporaryDrawer() {
 
   const itemsPerPage = 4; // 페이지당 항목 수
 
-  //   서버에서 받아올? 사용자 입력값 (예시)
-  const items = ['Inbox', 'Starred', 'Send email', 'Drafts', 'All mail', 'Trash', 'Spam'];
+  //서버에서 유저가 입력한 값으로 items변경
+  const [items, setItems] = useState([]);
+  const handleLoadClick = async () => { 
+    const { context } = await getRevies();
+    setItems(context);
+  };
 
   const handleChangePage = (event, newPage) => {
     setCurrentPage(newPage);
@@ -34,7 +48,7 @@ export default function TemporaryDrawer() {
         {paginatedItems.map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemIcon>{ (currentPage-1) * itemsPerPage + index+1 + "." }{<InboxIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>
@@ -59,7 +73,7 @@ export default function TemporaryDrawer() {
       >
         <MenuIcon />
       </Button>
-      <Drawer open={open} onClose={toggleDrawer(false)}>
+      <Drawer open={open} onClose={toggleDrawer(false)} onClick={handleLoadClick}>
         {DrawerList}
       </Drawer>
     </div>
