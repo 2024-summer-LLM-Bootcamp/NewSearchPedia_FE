@@ -1,12 +1,11 @@
 import * as React from 'react';
-import {useState} from 'react';
-import { Box, Card, CardActions, CardContent, Button, Typography, Container, TextField, Grid }from '@mui/material';
+import { useState } from 'react';
+import { Box, Card, CardActions, CardContent, Button, Typography, Container, TextField, Grid } from '@mui/material';
 import PrimarySearchAppBar from './PrimarySearchAppBar';
 import newsList from './newsData';
 import keywords from './keywordData';
 
 export default function Article() {
-
   const [inputValue, setInput] = useState('');
 
   const saveUserInput = (value) => {
@@ -19,7 +18,6 @@ export default function Article() {
       saveUserInput(event.target.value);
     }
   };
-
 
   return (
     <>
@@ -98,7 +96,8 @@ export default function Article() {
           </Grid>
 
           <Box sx={{ maxWidth: '80%', marginTop: 25, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <TextField sx={{ width: '100%' }} fullWidth label="내용을 입력해주세요." id="fullWidth" onKeyDown={handleKeyDown}/>
+            <TextField sx={{ width: '100%' }} fullWidth label="내용을 입력해주세요." id="fullWidth" onKeyDown={handleKeyDown} />
+            {console.log(inputValue)}
           </Box>
         </Box>
       </Container>
