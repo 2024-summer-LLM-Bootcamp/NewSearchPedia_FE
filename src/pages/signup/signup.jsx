@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import { Box, Avatar, Button, TextField, Link, Grid, Typography, Container, InputAdornment, IconButton } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import moment from 'moment';
+import useUserStore from '@store/useUserStore';
+import auth from '../../api/accountAPI';
 
 function SignUp() {
+  const { setUser } = useUserStore();
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClick = () => {
@@ -16,12 +20,24 @@ function SignUp() {
     const submitData = {
       name: data.get('name'),
       email: data.get('email'),
-      password: data.get('password'),
+      password1: data.get('password'),
       password2: data.get('password2'),
     };
 
-    if (submitData.password !== submitData.password2) alert('비밀번호가 일치하지 않습니다.');
-    else console.log(submitData);
+    if (submitData.password1 !== submitData.password2) alert('비밀번호가 일치하지 않습니다.');
+    else
+      auth
+        .signUp(submitData)
+        .then((res) => {
+          console.log('signup success', res);
+          localStorage.setItem('access_token', res.data.access);
+          localStorage.setItem('access_expiration', moment().add(30, 'minute').format('yyyy-MM-DD HH:mm:ss'));
+          setUser(res.data.user);
+          window.location.href = '/';
+        })
+        .catch((err) => {
+          console.log('signup err', err);
+        });
   };
 
   return (
