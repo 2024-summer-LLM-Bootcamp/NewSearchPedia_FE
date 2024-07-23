@@ -1,18 +1,25 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { Container, TextField, Grid } from '@mui/material';
+import {useState} from 'react';
+import { Box, Card, CardActions, CardContent, Button, Typography, Container, TextField, Grid }from '@mui/material';
 import PrimarySearchAppBar from './PrimarySearchAppBar';
+import newsList from './newsData';
+import keywords from './keywordData';
 
 export default function Article() {
-  // 서버에서 받아올 뉴스 data
-  const newsList = ['뉴스1', '뉴스2', '뉴스3', '뉴스4', '뉴스5', '뉴스6', '뉴스7'];
-  // 서버에서 받아올 키워드 data
-  const keywords = ['트럼프', '오바마', '바이든', '머스크', '엔비디아'];
+
+  const [inputValue, setInput] = useState('');
+
+  const saveUserInput = (value) => {
+    setInput(value);
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      // 엔터키를 눌렀을 때 호출될 함수
+      saveUserInput(event.target.value);
+    }
+  };
+
 
   return (
     <>
@@ -91,7 +98,7 @@ export default function Article() {
           </Grid>
 
           <Box sx={{ maxWidth: '80%', marginTop: 25, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <TextField sx={{ width: '100%' }} fullWidth label="내용을 입력해주세요." id="fullWidth" />
+            <TextField sx={{ width: '100%' }} fullWidth label="내용을 입력해주세요." id="fullWidth" onKeyDown={handleKeyDown}/>
           </Box>
         </Box>
       </Container>
