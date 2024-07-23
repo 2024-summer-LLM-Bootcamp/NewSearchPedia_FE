@@ -13,6 +13,7 @@ function App() {
       if (isExpired('access_expiration')) {
         resetUser();
       } else {
+        console.log(localStorage.getItem('access_token'));
         await auth
           .getUser()
           .then((res) => {

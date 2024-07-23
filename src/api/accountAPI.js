@@ -4,7 +4,7 @@ import Api from './api.js';
 const auth = {
   signUp(data) {
     delete axios.defaults.headers.common.Authorization;
-    return axios.post('/api/accounts/dj-rest-auth/registration', data);
+    return axios.post('/api/accounts/dj-rest-auth/registration/', data);
   },
   login(data) {
     delete axios.defaults.headers.common.Authorization;
