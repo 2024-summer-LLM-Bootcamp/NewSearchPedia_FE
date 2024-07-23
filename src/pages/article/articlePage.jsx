@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { Box, Card, CardActions, CardContent, Button, Typography, Container, TextField, Grid } from '@mui/material';
-import PrimarySearchAppBar from './PrimarySearchAppBar';
-import newsList from './newsData';
-import keywords from './keywordData';
+import PrimarySearchAppBar from './component/PrimarySearchAppBar';
+import newsList from './Data/newsData';
+import keywords from './Data/keywordData';
 
 export default function Article() {
   const [inputValue, setInput] = useState('');
