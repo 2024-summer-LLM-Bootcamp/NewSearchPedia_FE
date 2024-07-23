@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { styled, alpha, AppBar, Box, Toolbar, IconButton, Typography, InputBase, MenuItem, Menu } from '@mui/material';
-import { Search as SearchIcon, AccountCircle, MoreVert as MoreIcon } from '@mui/icons-material';
+import { AppBar, Box, Toolbar, IconButton, Typography, MenuItem, Menu } from '@mui/material';
+import { AccountCircle, MoreVert as MoreIcon } from '@mui/icons-material';
 import TemporaryDrawer from './drawer';
-
 
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
