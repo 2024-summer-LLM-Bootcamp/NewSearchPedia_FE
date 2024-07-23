@@ -4,7 +4,6 @@ import { Box, Card, CardActions, CardContent, Button, Typography, Container, Tex
 import PrimarySearchAppBar from './component/PrimarySearchAppBar';
 import serverData from './Data/serverData';
 
-
 export default function Article() {
   const [inputValue, setInput] = useState('');
 
@@ -79,7 +78,7 @@ export default function Article() {
             </Grid>
           </Grid>
 
-          <Box sx={{ maxWidth: '80%', marginTop : 20, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Box sx={{ maxWidth: '80%', marginTop: 20, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <TextField sx={{ width: '100%' }} fullWidth label="내용을 입력해주세요." id="fullWidth" onKeyDown={handleKeyDown} />
             {console.log(inputValue)}
           </Box>
