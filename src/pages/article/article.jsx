@@ -15,12 +15,13 @@ export default function Article() {
   const keywords = ['트럼프', '오바마', '바이든', '머스크', '엔비디아'];
 
   return (
-    <Container>
+    <>
       <PrimarySearchAppBar />
+      <Container maxWidth="">
       <Box sx={{ flexGrow: 1, mt: 3 }}>
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <Card sx={{ minWidth: 500, minHeight: 500, margin: 1 }}>
+            <Card sx={{ margin: 1 }}>
               <CardContent>
                 <Typography variant="h5" component="div">
                   뉴스 리스트
@@ -54,7 +55,7 @@ export default function Article() {
           </Grid>
 
           <Grid item xs={6}>
-            <Card sx={{ minWidth: 500, minHeight: 500, margin: 1 }}>
+            <Card sx={{ margin: 1 }}>
               <CardContent>
                 <Typography variant="h5" component="div">
                   헤드라인: 트럼프 전 대통령, [사건/소송/활동] 관련 법적 문제 직면
@@ -89,10 +90,11 @@ export default function Article() {
           </Grid>
         </Grid>
 
-        <Box sx={{ width: 800, maxWidth: '100%', marginTop: 25, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <TextField sx={{ width: '100%' }} fullWidth label="내용을 입력해주세요." id="fullWidth" />
+        <Box sx={{ maxWidth: '80%', marginTop: 25, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <TextField sx={{ width: '100%', }} fullWidth label="내용을 입력해주세요." id="fullWidth" />
         </Box>
       </Box>
     </Container>
+    </>
   );
 }
