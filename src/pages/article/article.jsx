@@ -27,7 +27,7 @@ export default function Article() {
                 </Typography>
                 <Typography sx={{ mb: 1.5, marginLeft: '30px' }} color="text.secondary">
                   <ol>
-                    {newsList.map((news, i) => (
+                    {newsList.map((news) => (
                       <li>
                         <a href="https://news.naver.com/">{news}</a>
                       </li>
@@ -40,7 +40,7 @@ export default function Article() {
                   </Typography>
                   <Typography sx={{ mb: 1.5, marginLeft: '30px' }} color="text.secondary">
                     <ol>
-                      {keywords.map((keyword, i) => (
+                      {keywords.map((keyword) => (
                         <li>{keyword}</li>
                       ))}
                     </ol>
