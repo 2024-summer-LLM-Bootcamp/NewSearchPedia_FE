@@ -3,8 +3,8 @@ import { Box, Avatar, Button, TextField, Link, Grid, Typography, Container, Inpu
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import moment from 'moment';
-import auth from '../../api/accountAPI';
 import useUserStore from '@store/useUserStore';
+import auth from '../../api/accountAPI';
 
 function SignUp() {
   const { setUser } = useUserStore();
