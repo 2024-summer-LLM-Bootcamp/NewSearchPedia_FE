@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import { Box, TextField, InputAdornment, IconButton } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import ClearIcon from "@mui/icons-material/Clear";
+import React, { useState } from 'react';
+import { Box, TextField, InputAdornment, IconButton } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+import ClearIcon from '@mui/icons-material/Clear';
 
-const ArticleSearch = () => {
-  const [searchValue, setSearchValue] = useState('');
-  const [showClearIcon, setShowClearIcon] = useState(false);
-
-  const handleChange = (event) => {
-    const value = event.target.value;
-    setSearchValue(value);
-    setShowClearIcon(value !== '');
-  };
-
-  const handleClear = () => {
-    setSearchValue('');
-    setShowClearIcon(false);
-  };
+function ArticleSearch() {
+    const [searchValue, setSearchValue] = useState('');
+    const [showClearIcon, setShowClearIcon] = useState(false);
+  
+    const handleChange = ({ target: { value } }) => {
+      setSearchValue(value);
+      setShowClearIcon(value !== '');
+    };
+  
+    const handleClear = () => {
+      setSearchValue('');
+      setShowClearIcon(false);
+    };
+  
 
   return (
     <Box sx={{ padding: 2 }}>
