@@ -23,7 +23,7 @@ Api.interceptors.response.use(
       return Promise.reject(err);
     }
 
-    /** refresh 요청이 끝나고 재요청을 보냈는데도 에러가 발생한 경우 재귀적으로 loop가 발생할 수 있기 때문에 이를 방지하기 위한 주석 2번 부분처럼 config.sent를 true로 설정*/
+    /** refresh 요청이 끝나고 재요청을 보냈는데도 에러가 발생한 경우 재귀적으로 loop가 발생할 수 있기 때문에 이를 방지하기 위한 주석 2번 부분처럼 config.sent를 true로 설정 */
     config.sent = true;
 
     // refresh 요청

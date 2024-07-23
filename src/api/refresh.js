@@ -8,7 +8,7 @@ const goToLogin = () => {
 
 const refresh = async (config) => {
   const expireAt = localStorage.getItem('access_expiration');
-  let token = localStorage.getItem('access_token');
+  const token = localStorage.getItem('access_token');
 
   if (!expireAt) {
     console.log(`accessToken doesn't exist`);
@@ -30,8 +30,8 @@ const refresh = async (config) => {
 const refreshErrorHandle = (err) => {
   console.log('refreshErrorHandle', err);
   if (err !== null) {
-    auth.logout().catch((err) => {
-      console.error(err);
+    auth.logout().catch((error) => {
+      console.error(error);
     });
     goToLogin();
   }
