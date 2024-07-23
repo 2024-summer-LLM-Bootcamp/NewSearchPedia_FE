@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { styled, alpha, AppBar, Box, Toolbar, IconButton, Typography, InputBase, Badge, MenuItem, Menu } from '@mui/material';
-import { Search as SearchIcon, AccountCircle, Mail as MailIcon, Notifications as NotificationsIcon, MoreVert as MoreIcon } from '@mui/icons-material';
+import { styled, alpha, AppBar, Box, Toolbar, IconButton, Typography, InputBase, MenuItem, Menu } from '@mui/material';
+import { Search as SearchIcon, AccountCircle, MoreVert as MoreIcon } from '@mui/icons-material';
 import TemporaryDrawer from './drawer';
 
 const Search = styled('div')(({ theme }) => ({

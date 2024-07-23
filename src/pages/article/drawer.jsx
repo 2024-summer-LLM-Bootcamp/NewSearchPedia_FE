@@ -10,7 +10,7 @@ export default function TemporaryDrawer() {
 
   const itemsPerPage = 4; // 페이지당 항목 수
 
-//   서버에서 받아올? 사용자 입력값 (예시)
+  //   서버에서 받아올? 사용자 입력값 (예시)
   const items = ['Inbox', 'Starred', 'Send email', 'Drafts', 'All mail', 'Trash', 'Spam'];
 
   const handleChangePage = (event, newPage) => {
