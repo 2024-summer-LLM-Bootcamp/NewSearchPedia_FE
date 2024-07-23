@@ -9,6 +9,12 @@ import auth from '../../api/accountAPI';
 function SignUp() {
   const { setUser } = useUserStore();
   const [showPassword, setShowPassword] = useState(false);
+  const [errors, setErrors] = useState({
+    name: '',
+    email: '',
+    password1: '',
+    password2: '',
+  });
 
   const handleClick = () => {
     setShowPassword((prev) => !prev);
@@ -37,6 +43,14 @@ function SignUp() {
         })
         .catch((err) => {
           console.log('signup err', err);
+          // text field 입력값 에러인 경우 헬퍼텍스트
+          const serverErrors = err.response.data;
+          setErrors({
+            name: serverErrors.name?.[0] || '',
+            email: serverErrors.email?.[0] || '',
+            password1: serverErrors.password1?.[0] || '',
+            password2: serverErrors.password2?.[0] || '',
+          });
         });
   };
 
@@ -59,10 +73,10 @@ function SignUp() {
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={12}>
-              <TextField autoComplete="name" name="name" required fullWidth id="name" label="Name" autoFocus />
+              <TextField autoComplete="name" name="name" required fullWidth id="name" label="Name" autoFocus error={!!errors.name} helperText={errors.name} />
             </Grid>
             <Grid item xs={12}>
-              <TextField required fullWidth id="email" label="Email Address" name="email" autoComplete="email" />
+              <TextField required fullWidth id="email" label="Email Address" name="email" autoComplete="email" error={!!errors.email} helperText={errors.email} />
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -82,6 +96,8 @@ function SignUp() {
                 type={showPassword ? 'text' : 'password'}
                 id="password"
                 autoComplete="new-password"
+                error={!!errors.password1}
+                helperText={errors.password1}
               />
             </Grid>
             <Grid item xs={12}>
@@ -101,6 +117,8 @@ function SignUp() {
                 name="password2"
                 label="Password check"
                 id="password2"
+                error={!!errors.password1}
+                helperText={errors.password1}
               />
             </Grid>
             {/* <Grid item xs={12}>
