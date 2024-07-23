@@ -20,8 +20,12 @@ export default function TemporaryDrawer() {
     setOpen(newOpen);
   };
 
+  const preventClickPropagation = (event) => {
+    event.stopPropagation();
+  };
+
   const DrawerList = (
-    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+    <Box sx={{ width: 250 }} role="presentation" onClick={preventClickPropagation}>
       <ArticleSearch />
       <List>
         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (

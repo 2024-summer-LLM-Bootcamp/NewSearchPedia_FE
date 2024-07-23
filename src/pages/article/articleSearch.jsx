@@ -4,19 +4,18 @@ import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 
 function ArticleSearch() {
-    const [searchValue, setSearchValue] = useState('');
-    const [showClearIcon, setShowClearIcon] = useState(false);
-  
-    const handleChange = ({ target: { value } }) => {
-      setSearchValue(value);
-      setShowClearIcon(value !== '');
-    };
-  
-    const handleClear = () => {
-      setSearchValue('');
-      setShowClearIcon(false);
-    };
-  
+  const [searchValue, setSearchValue] = useState('');
+  const [showClearIcon, setShowClearIcon] = useState(false);
+
+  const handleChange = ({ target: { value } }) => {
+    setSearchValue(value);
+    setShowClearIcon(value !== '');
+  };
+
+  const handleClear = () => {
+    setSearchValue('');
+    setShowClearIcon(false);
+  };
 
   return (
     <Box sx={{ padding: 2 }}>
@@ -44,6 +43,6 @@ function ArticleSearch() {
       />
     </Box>
   );
-};
+}
 
 export default ArticleSearch;
