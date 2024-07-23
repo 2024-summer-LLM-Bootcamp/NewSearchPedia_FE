@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Box, Avatar, Button, TextField, Link, Grid, Typography, Container, InputAdornment, IconButton } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import moment from 'moment';
+import auth from '../../api/accountAPI';
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -13,10 +15,26 @@ function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
+    const submitData = { email: data.get('email'), password: data.get('password') };
+    console.log('login:', submitData);
+
+    auth.logout();
+    auth
+      .login(submitData)
+      .then((res) => {
+        console.log('login sucess', res);
+        localStorage.setItem('access_token', res.data.access);
+        localStorage.setItem('access_expiration', moment().add(30, 'minute').format('yyyy-MM-DD HH:mm:ss'));
+
+        window.location.href = '/';
+      })
+      .catch((err) => {
+        console.log('login err', err);
+        if (err.response.status === 400) {
+          alert('유효하지 않은 회원정보입니다.');
+        }
+      });
   };
 
   return (
