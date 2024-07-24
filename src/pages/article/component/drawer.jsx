@@ -7,7 +7,8 @@ import ArticleSearch from './articleSearch';
 
 // 서버에서 데이터를 가져오는 함수
 async function getRevies() {
-  const response = await fetch(); // url지정해야함 fetch(url)
+  url = '';
+  const response = await fetch(url);
   const body = await response.json();
   return body;
 }
@@ -47,7 +48,7 @@ export default function TemporaryDrawer() {
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                {(currentPage - 1) * itemsPerPage + index + 1 + '.'}
+                {(currentPage - 1) * itemsPerPage + index + 1}
                 <InboxIcon />
               </ListItemIcon>
               <ListItemText primary={text} />
