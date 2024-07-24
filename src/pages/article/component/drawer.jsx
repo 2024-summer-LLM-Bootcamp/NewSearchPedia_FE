@@ -7,7 +7,7 @@ import ArticleSearch from './articleSearch';
 
 // 서버에서 데이터를 가져오는 함수
 async function getRevies() {
-  url = '';
+  const url = '';
   const response = await fetch(url);
   const body = await response.json();
   return body;
