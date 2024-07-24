@@ -1,85 +1,43 @@
 import * as React from 'react';
-import { AppBar, Box, Toolbar, IconButton, Typography, MenuItem, Menu } from '@mui/material';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AppBar, Box, Toolbar, IconButton, Typography, MenuItem, Menu, Button } from '@mui/material';
 import { AccountCircle, MoreVert as MoreIcon } from '@mui/icons-material';
+import useUserStore from '../../../store/useUserStore';
 import TemporaryDrawer from './drawer';
+import auth from '../../../api/accountAPI';
+
 
 export default function PrimarySearchAppBar() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const { user } = useUserStore();
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
+  const navigate = useNavigate();
+
+  const handleLoginClick = () => {
+    navigate('/login'); // 로그인 페이지로 이동
   };
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
+  const handleSignupClick = () => {
+    navigate('/signup'); // 회원가입 페이지로 이동
+  };
+  
+  const handleLogoutClick = async () => {
+    try {
+      // 서버에 로그아웃 요청을 보냅니다.
+      await auth.logout(); // 서버에서 세션을 종료하는 API 호출을 구현해야 합니다.
+
+      // Zustand 스토어에서 사용자 상태를 리셋합니다.
+      useUserStore.getState().resetUser(); // useUserStore에서 직접 resetUser를 호출합니다.
+
+      // 로그인 페이지로 리디렉션합니다.
+      // navigate('/login');
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
   };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
 
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
-  const menuId = 'primary-search-account-menu';
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
-
-  const mobileMenuId = 'primary-search-account-menu-mobile';
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton size="large" aria-label="account of current user" aria-controls="primary-search-account-menu" aria-haspopup="true" color="inherit">
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -94,19 +52,29 @@ export default function PrimarySearchAppBar() {
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" edge="end" aria-label="account of current user" aria-controls={menuId} aria-haspopup="true" onClick={handleProfileMenuOpen} color="inherit">
-              <AccountCircle />
-            </IconButton>
-          </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton size="large" aria-label="show more" aria-controls={mobileMenuId} aria-haspopup="true" onClick={handleMobileMenuOpen} color="inherit">
-              <MoreIcon />
-            </IconButton>
+            {
+              user.pk == 0 ? 
+              <>
+                <IconButton size="small" edge="end" aria-haspopup="true" color="inherit" >
+                  <Button onClick={handleLoginClick} sx={{color : 'white'}}>Login</Button>
+                </IconButton>
+                <IconButton size="small" edge="end" aria-haspopup="true" color="inherit">
+                  <Button onClick={handleSignupClick} sx={{color : 'white'}}>Signup</Button>
+                </IconButton>
+              </>
+              :
+              <>
+              <IconButton size="small" edge="end" aria-haspopup="true" color="inherit" >
+                  <Button onClick={handleLogoutClick} sx={{color : 'white'}}>Logout</Button>
+              </IconButton>
+              <IconButton size="large" edge="end" aria-label="account of current user" aria-haspopup="true" color="inherit">
+                <AccountCircle />
+              </IconButton> 
+              </>
+            }
           </Box>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
     </Box>
   );
 }
