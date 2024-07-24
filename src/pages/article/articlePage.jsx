@@ -1,21 +1,27 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Box, Card, CardContent, Typography, TextField, Grid } from '@mui/material';
+import { Box, Card, CardContent, Typography, TextField, Grid, IconButton } from '@mui/material';
+import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 import PrimarySearchAppBar from './component/PrimarySearchAppBar';
 import serverData from './Data/serverData';
 
 export default function Article() {
-  const [inputValue, setInput] = useState('');
+  const [inputValue, setInputValue] = useState('');
+  const [savedValue, setSavedValue] = useState('');
 
   const saveUserInput = (value) => {
-    setInput(value);
+    setSavedValue(value);
+    console.log(value);
   };
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-      // 엔터키를 눌렀을 때 호출될 함수
-      saveUserInput(event.target.value);
+      saveUserInput(inputValue);
     }
+  };
+
+  const handleClick = () => {
+    saveUserInput(inputValue);
   };
 
   return (
@@ -31,24 +37,22 @@ export default function Article() {
                 </Typography>
                 <Typography sx={{ mb: 1.5, marginLeft: '30px' }} color="text.secondary">
                   <ol>
-                    {serverData.newsList.map((news) => (
-                      <li>
+                    {serverData.newsList.map((news, index) => (
+                      <li key={index}>
                         <a href={news.link}>{news.title}</a>
                       </li>
                     ))}
                   </ol>
                 </Typography>
-                <Typography variant="body2">
-                  <Typography variant="h5" component="div">
-                    키워드 리스트
-                  </Typography>
-                  <Typography sx={{ mb: 1.5, marginLeft: '30px' }} color="text.secondary">
-                    <ol>
-                      {serverData.encycList.map((word) => (
-                        <li>{word.keyword}</li>
-                      ))}
-                    </ol>
-                  </Typography>
+                <Typography variant="h5" component="div">
+                  키워드 리스트
+                </Typography>
+                <Typography sx={{ mb: 1.5, marginLeft: '30px' }} color="text.secondary">
+                  <ol>
+                    {serverData.encycList.map((word, index) => (
+                      <li key={index}>{word.keyword}</li>
+                    ))}
+                  </ol>
                 </Typography>
               </CardContent>
             </Card>
@@ -87,8 +91,25 @@ export default function Article() {
             borderRadius: 5,
           }}
         >
-          <TextField sx={{ width: '100%' }} fullWidth label="내용을 입력해주세요." id="fullWidth" onKeyDown={handleKeyDown} />
-          {console.log(inputValue)}
+          <TextField
+            sx={{ width: '100%' }}
+            fullWidth
+            label="내용을 입력해주세요."
+            id="fullWidth"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
+          <IconButton
+            size="large"
+            edge="end"
+            aria-label="save input"
+            aria-haspopup="true"
+            color="inherit"
+            onClick={handleClick}
+          >
+            <ArrowCircleUpIcon />
+          </IconButton>
         </Box>
       </Box>
     </>
