@@ -33,8 +33,8 @@ export default function Article() {
       <PrimarySearchAppBar />
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
-          <Grid item xs={4}>
-            <Card sx={{ margin: 1 }}>
+          <Grid item xs={6}>
+            <Card sx={{ margin:1 }}>
               <CardContent>
                 <Typography variant="h5" component="div">
                   뉴스 리스트
@@ -49,6 +49,27 @@ export default function Article() {
                     ))}
                   </ol>
                 </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+
+          <Grid item xs={6}>
+            <Card sx={{ margin: 1 }}>
+              <CardContent>
+                <Typography variant="h5" component="div">
+                  {serverData[0].user_input}
+                </Typography>
+                <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                  {serverData[0].created_at}
+                </Typography>
+                <Typography variant="body2" sx={{ whiteSpace: 'pre-line', overflowWrap: 'break-word' }}>
+                  요약 : {serverData[0].news_summary}
+                </Typography>
+              </CardContent>
+            </Card>
+
+            <Card sx={{ margin : 1}}>
+              <CardContent>
                 <Typography variant="h5" component="div">
                   키워드 리스트
                 </Typography>
@@ -61,22 +82,6 @@ export default function Article() {
                       </li>
                     ))}
                   </ol>
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-
-          <Grid item xs={8}>
-            <Card sx={{ margin: 1 }}>
-              <CardContent>
-                <Typography variant="h5" component="div">
-                  {serverData[0].user_input}
-                </Typography>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  {serverData[0].created_at}
-                </Typography>
-                <Typography variant="body2" sx={{ whiteSpace: 'pre-line', overflowWrap: 'break-word' }}>
-                  요약 : {serverData[0].news_summary}
                 </Typography>
               </CardContent>
             </Card>

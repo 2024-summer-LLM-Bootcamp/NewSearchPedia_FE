@@ -43,7 +43,7 @@ export default function PrimarySearchAppBar() {
             <TemporaryDrawer />
           </IconButton>
           <Typography variant="h6" noWrap component="div" sx={{ display: { xs: 'none', sm: 'block' } }}>
-            NewSearchManager
+            NewSearchPedia
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
