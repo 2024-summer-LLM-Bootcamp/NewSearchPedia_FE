@@ -40,7 +40,9 @@ export default function PrimarySearchAppBar() {
         <Toolbar>
           <IconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }}>
             {/* <MenuIcon /> */}
-            <TemporaryDrawer />
+            {
+              user.pk === 0 ? <></> : <TemporaryDrawer />
+            }
           </IconButton>
           <Typography variant="h6" noWrap component="div" sx={{ display: { xs: 'none', sm: 'block' } }}>
             NewSearchPedia

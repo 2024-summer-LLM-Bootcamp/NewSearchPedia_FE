@@ -34,7 +34,7 @@ export default function Article() {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <Card sx={{ margin:1 }}>
+            <Card sx={{ margin: 1}}>
               <CardContent>
                 <Typography variant="h5" component="div">
                   뉴스 리스트
@@ -68,7 +68,7 @@ export default function Article() {
               </CardContent>
             </Card>
 
-            <Card sx={{ margin : 1}}>
+            <Card sx={{ margin: 1 }}>
               <CardContent>
                 <Typography variant="h5" component="div">
                   키워드 리스트
