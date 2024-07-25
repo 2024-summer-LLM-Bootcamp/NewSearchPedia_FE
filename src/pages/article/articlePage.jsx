@@ -1,17 +1,18 @@
+/* eslint-disable */
 import * as React from 'react';
 import { useState } from 'react';
 import { Box, Card, CardContent, Typography, TextField, Grid, IconButton } from '@mui/material';
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 import PrimarySearchAppBar from './component/PrimarySearchAppBar';
 import serverData from './Data/serverData';
+import Thumbnail from './component/thumbnail';
 
 export default function Article() {
   const [inputValue, setInputValue] = useState('');
-  // eslint-disable-next-line
   const [savedValue, setSavedValue] = useState('');
 
   const saveUserInput = (value) => {
-    //입력값이 비어있지 않은지 확인
+    // 입력값이 비어있지 않은지 확인
     if (value.trim()) {
       setSavedValue(value);
       // console.log(value);
@@ -42,8 +43,9 @@ export default function Article() {
                 <Typography sx={{ mb: 1.5, marginLeft: '30px' }} color="text.secondary">
                   <ol>
                     {serverData[0].news_list.map((news) => (
-                      <li>
-                        <a dangerouslySetInnerHTML={{ __html: news.title }} href={news.link}></a>
+                      <li style={{display : 'flex'}}>
+                        {/* // eslint-disable-next-line  */}
+                        <Thumbnail src={news.thumbnail} alt={news.title} news_title={news.title} news_link={news.link}/>
                       </li>
                     ))}
                   </ol>
@@ -55,6 +57,7 @@ export default function Article() {
                   <ol>
                     {serverData[0].encyc_list.map((word) => (
                       <li>
+                        {/* // eslint-disable-next-line  */}
                         <a dangerouslySetInnerHTML={{ __html: word.title }} href={word.link}></a>
                       </li>
                     ))}
