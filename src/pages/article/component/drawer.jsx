@@ -31,9 +31,7 @@ export default function TemporaryDrawer() {
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={preventClickPropagation}>
       <ArticleSearch />
-      <List>
-        
-      </List>
+      <List></List>
       <Divider />
     </Box>
   );

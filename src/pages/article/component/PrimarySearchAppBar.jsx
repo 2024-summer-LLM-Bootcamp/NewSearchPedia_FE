@@ -10,7 +10,7 @@ export default function PrimarySearchAppBar() {
   const { user } = useUserStore();
 
   const navigate = useNavigate();
-  
+
   const handleMainClick = () => {
     navigate('/'); // 메인 페이지로 이동
   };
@@ -43,7 +43,7 @@ export default function PrimarySearchAppBar() {
       <AppBar position="static">
         <Toolbar>
           {/* <IconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }}> */}
-            {user.pk === 0 ? <></> : <TemporaryDrawer />}
+          {user.pk === 0 ? <></> : <TemporaryDrawer />}
           {/* </IconButton> */}
           <IconButton size="large" edge="end" color="inherit">
             <Button onClick={handleMainClick} sx={{ color: 'white' }}>
