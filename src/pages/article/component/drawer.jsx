@@ -42,7 +42,7 @@ export default function TemporaryDrawer() {
       >
         <MenuIcon />
       </Button>
-      <Drawer open={open} onClose={toggleDrawer(false)} onClick={handleLoadClick}>
+      <Drawer open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
       </Drawer>
     </div>
