@@ -12,12 +12,10 @@ const refresh = async (config) => {
 
   if (!expireAt) {
     console.log(`accessToken doesn't exist`);
-    goToLogin();
     return config;
   }
   if (isExpired('access_expiration')) {
     console.log(`accessToken expired`);
-    goToLogin();
     return config;
   }
 
