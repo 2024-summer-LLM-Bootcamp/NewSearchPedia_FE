@@ -4,6 +4,7 @@ import { Article, Login, NotFound, SignUp } from './pages';
 import useUserStore from './store/useUserStore';
 import auth from './api/accountAPI';
 import isExpired from './utils/isExpired';
+import PrimarySearchAppBar from './pages/article/component/PrimarySearchAppBar';
 
 function App() {
   const { isLoadingUser, setUser, resetUser, setIsLoadingUser } = useUserStore();
@@ -37,6 +38,7 @@ function App() {
     isLoadingUser && (
       <div className="App">
         <BrowserRouter>
+        <PrimarySearchAppBar/>
           <Routes>
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
