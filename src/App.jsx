@@ -5,9 +5,10 @@ import useUserStore from './store/useUserStore';
 import auth from './api/accountAPI';
 import isExpired from './utils/isExpired';
 import PrimarySearchAppBar from './pages/article/component/PrimarySearchAppBar';
+import { PrivateRoute } from './components';
 
 function App() {
-  const { isLoadingUser, setUser, resetUser, setIsLoadingUser } = useUserStore();
+  const { user, isLoadingUser, setUser, resetUser, setIsLoadingUser } = useUserStore();
 
   useEffect(() => {
     const setUserInformation = async () => {
@@ -38,11 +39,18 @@ function App() {
     isLoadingUser && (
       <div className="App">
         <BrowserRouter>
-        <PrimarySearchAppBar/>
+          <PrimarySearchAppBar />
           <Routes>
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/" element={<Article />} />
+            <Route
+              path="/"
+              element={
+                <PrivateRoute user={user}>
+                  <Article />
+                </PrivateRoute>
+              }
+            />
             {/* notFound : 일치하는 라우트 없는 경우 처리 */}
             <Route path="*" element={<NotFound />} />
           </Routes>
