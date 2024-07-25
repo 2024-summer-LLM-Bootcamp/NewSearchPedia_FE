@@ -1,4 +1,3 @@
-/* eslint-disable */
 import * as React from 'react';
 import { useState } from 'react';
 import { Box, Card, CardContent, Typography, TextField, Grid, IconButton } from '@mui/material';
@@ -34,7 +33,7 @@ export default function Article() {
       <PrimarySearchAppBar />
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
-          <Grid item xs={6}>
+          <Grid item xs={4}>
             <Card sx={{ margin: 1 }}>
               <CardContent>
                 <Typography variant="h5" component="div">
@@ -45,7 +44,7 @@ export default function Article() {
                     {serverData[0].news_list.map((news) => (
                       <li style={{display : 'flex'}}>
                         {/* // eslint-disable-next-line  */}
-                        <Thumbnail src={news.thumbnail} alt={news.title} news_title={news.title} news_link={news.link}/>
+                        <Thumbnail src={news.thumbnail} alt={news.title} newsTitle={news.title} newsLink={news.link}/>
                       </li>
                     ))}
                   </ol>
@@ -67,7 +66,7 @@ export default function Article() {
             </Card>
           </Grid>
 
-          <Grid item xs={6}>
+          <Grid item xs={8}>
             <Card sx={{ margin: 1 }}>
               <CardContent>
                 <Typography variant="h5" component="div">
