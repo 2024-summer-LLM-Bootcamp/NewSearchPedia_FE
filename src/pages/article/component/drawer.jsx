@@ -4,6 +4,7 @@ import { Box, Drawer, Button, List, Divider, ListItem, ListItemButton, ListItemI
 import { Inbox as InboxIcon, Menu as MenuIcon } from '@mui/icons-material';
 import Pagination from '@mui/material/Pagination';
 import ArticleSearch from './articleSearch';
+import serverData from '../Data/serverData';
 
 export default function TemporaryDrawer() {
   const [open, setOpen] = React.useState(false);
@@ -23,7 +24,11 @@ export default function TemporaryDrawer() {
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={preventClickPropagation}>
       <ArticleSearch />
-      <List></List>
+      {serverData.map((article) => (
+        <List>
+          {article.user_input}
+        </List>
+      ))}
       <Divider />
     </Box>
   );
