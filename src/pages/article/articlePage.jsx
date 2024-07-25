@@ -13,8 +13,8 @@ export default function Article() {
   const saveUserInput = (value) => {
     //입력값이 비어있지 않은지 확인
     if (value.trim()) {
-    setSavedValue(value);
-    // console.log(value);
+      setSavedValue(value);
+      // console.log(value);
     }
   };
 
@@ -43,7 +43,7 @@ export default function Article() {
                   <ol>
                     {serverData[0].news_list.map((news) => (
                       <li>
-                        <a dangerouslySetInnerHTML={{__html: news.title }} href={news.link}></a>
+                        <a dangerouslySetInnerHTML={{ __html: news.title }} href={news.link}></a>
                       </li>
                     ))}
                   </ol>
@@ -55,7 +55,7 @@ export default function Article() {
                   <ol>
                     {serverData[0].encyc_list.map((word) => (
                       <li>
-                        <a dangerouslySetInnerHTML={{__html: word.title }} href={word.link}></a>
+                        <a dangerouslySetInnerHTML={{ __html: word.title }} href={word.link}></a>
                       </li>
                     ))}
                   </ol>
