@@ -11,8 +11,9 @@ const auth = {
     return axios.post('/api/accounts/dj-rest-auth/login/', data);
   },
   logout() {
-    // delete Api.defaults.headers.common.Authorization; // 서버에 post할 땐 필요 x
+    delete Api.defaults.headers.common.Authorization;
     localStorage.removeItem('access_expiration');
+    localStorage.removeItem('access_token');
     // return Api.post('/api/accounts/dj-rest-auth/logout/');
   },
   getUser() {
