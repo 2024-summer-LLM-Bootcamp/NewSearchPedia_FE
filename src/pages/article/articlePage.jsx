@@ -11,8 +11,11 @@ export default function Article() {
   const [savedValue, setSavedValue] = useState('');
 
   const saveUserInput = (value) => {
+    //입력값이 비어있지 않은지 확인
+    if (value.trim()) {
     setSavedValue(value);
     // console.log(value);
+    }
   };
 
   const handleKeyDown = (event) => {
@@ -38,9 +41,9 @@ export default function Article() {
                 </Typography>
                 <Typography sx={{ mb: 1.5, marginLeft: '30px' }} color="text.secondary">
                   <ol>
-                    {serverData.newsList.map((news) => (
+                    {serverData[0].news_list.map((news) => (
                       <li>
-                        <a href={news.link}>{news.title}</a>
+                        <a dangerouslySetInnerHTML={{__html: news.title }} href={news.link}></a>
                       </li>
                     ))}
                   </ol>
@@ -50,8 +53,10 @@ export default function Article() {
                 </Typography>
                 <Typography sx={{ mb: 1.5, marginLeft: '30px' }} color="text.secondary">
                   <ol>
-                    {serverData.encycList.map((word) => (
-                      <li>{word.keyword}</li>
+                    {serverData[0].encyc_list.map((word) => (
+                      <li>
+                        <a dangerouslySetInnerHTML={{__html: word.title }} href={word.link}></a>
+                      </li>
                     ))}
                   </ol>
                 </Typography>
@@ -63,13 +68,13 @@ export default function Article() {
             <Card sx={{ margin: 1 }}>
               <CardContent>
                 <Typography variant="h5" component="div">
-                  {serverData.userInputValue}
+                  {serverData[0].user_input}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  {serverData.created_at}
+                  {serverData[0].created_at}
                 </Typography>
                 <Typography variant="body2" sx={{ whiteSpace: 'pre-line', overflowWrap: 'break-word' }}>
-                  요약 : {serverData.summary}
+                  요약 : {serverData[0].news_summary}
                 </Typography>
               </CardContent>
             </Card>
