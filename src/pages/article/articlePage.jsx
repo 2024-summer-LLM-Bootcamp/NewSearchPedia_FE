@@ -42,9 +42,9 @@ export default function Article() {
                 <Typography sx={{ mb: 1.5, marginLeft: '30px' }} color="text.secondary">
                   <ol>
                     {serverData[0].news_list.map((news) => (
-                      <li style={{display : 'flex'}}>
+                      <li style={{ display: 'flex' }}>
                         {/* // eslint-disable-next-line  */}
-                        <Thumbnail src={news.thumbnail} alt={news.title} newsTitle={news.title} newsLink={news.link}/>
+                        <Thumbnail src={news.thumbnail} alt={news.title} newsTitle={news.title} newsLink={news.link} date={news.date} />
                       </li>
                     ))}
                   </ol>
