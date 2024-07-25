@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppBar, Box, Toolbar, IconButton, Typography,Button } from '@mui/material';
-import { AccountCircle} from '@mui/icons-material';
+import { AppBar, Box, Toolbar, IconButton, Typography, Button } from '@mui/material';
+import { AccountCircle } from '@mui/icons-material';
 import useUserStore from '../../../store/useUserStore';
 import TemporaryDrawer from './drawer';
 import auth from '../../../api/accountAPI';
@@ -47,7 +47,7 @@ export default function PrimarySearchAppBar() {
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            {user.pk===0 ? (
+            {user.pk === 0 ? (
               <>
                 <IconButton size="small" edge="end" aria-haspopup="true" color="inherit">
                   <Button onClick={handleLoginClick} sx={{ color: 'white' }}>
@@ -66,12 +66,12 @@ export default function PrimarySearchAppBar() {
                   <Button onClick={handleLogoutClick} sx={{ color: 'white' }}>
                     Logout
                   </Button>
-                </IconButton>      
+                </IconButton>
                 <IconButton size="large" edge="end" aria-label="account of current user" aria-haspopup="true" color="inherit">
                   <AccountCircle />
                 </IconButton>
                 <IconButton size="small" edge="end" aria-haspopup="true" color="inherit">
-                    {user.name}
+                  {user.name}
                 </IconButton>
               </>
             )}

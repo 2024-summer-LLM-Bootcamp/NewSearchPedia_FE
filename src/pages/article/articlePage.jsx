@@ -7,11 +7,12 @@ import serverData from './Data/serverData';
 
 export default function Article() {
   const [inputValue, setInputValue] = useState('');
+  // eslint-disable-next-line
   const [savedValue, setSavedValue] = useState('');
 
   const saveUserInput = (value) => {
     setSavedValue(value);
-    console.log(value);
+    // console.log(value);
   };
 
   const handleKeyDown = (event) => {
@@ -37,8 +38,8 @@ export default function Article() {
                 </Typography>
                 <Typography sx={{ mb: 1.5, marginLeft: '30px' }} color="text.secondary">
                   <ol>
-                    {serverData.newsList.map((news, index) => (
-                      <li key={index}>
+                    {serverData.newsList.map((news) => (
+                      <li>
                         <a href={news.link}>{news.title}</a>
                       </li>
                     ))}
@@ -49,8 +50,8 @@ export default function Article() {
                 </Typography>
                 <Typography sx={{ mb: 1.5, marginLeft: '30px' }} color="text.secondary">
                   <ol>
-                    {serverData.encycList.map((word, index) => (
-                      <li key={index}>{word.keyword}</li>
+                    {serverData.encycList.map((word) => (
+                      <li>{word.keyword}</li>
                     ))}
                   </ol>
                 </Typography>
@@ -91,23 +92,8 @@ export default function Article() {
             borderRadius: 5,
           }}
         >
-          <TextField
-            sx={{ width: '100%' }}
-            fullWidth
-            label="내용을 입력해주세요."
-            id="fullWidth"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            onKeyDown={handleKeyDown}
-          />
-          <IconButton
-            size="large"
-            edge="end"
-            aria-label="save input"
-            aria-haspopup="true"
-            color="inherit"
-            onClick={handleClick}
-          >
+          <TextField sx={{ width: '100%' }} fullWidth label="내용을 입력해주세요." id="fullWidth" value={inputValue} onChange={(e) => setInputValue(e.target.value)} onKeyDown={handleKeyDown} />
+          <IconButton size="large" edge="end" aria-label="save input" aria-haspopup="true" color="inherit" onClick={handleClick}>
             <ArrowCircleUpIcon />
           </IconButton>
         </Box>
