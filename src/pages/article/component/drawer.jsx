@@ -42,8 +42,6 @@ export default function TemporaryDrawer() {
   const handleArticleClick = (id) => () => {
     navigate(`/detail/${id}`); // Navigate to URL with article ID
   };
-  
-  
 
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={preventClickPropagation}>
@@ -64,12 +62,7 @@ export default function TemporaryDrawer() {
         )}
       </List>
       <Divider />
-      <Pagination
-        count={totalPages}
-        page={currentPage}
-        onChange={handlePageChange}
-        sx={{ display: 'flex', justifyContent: 'center', marginTop: 2 }}
-      />
+      <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} sx={{ display: 'flex', justifyContent: 'center', marginTop: 2 }} />
     </Box>
   );
 
