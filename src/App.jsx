@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import { Article, Login, NotFound, SignUp } from './pages';
+import { Article, ArticleDetail, Login, NotFound, SignUp } from './pages';
 import useUserStore from './store/useUserStore';
 import auth from './api/accountAPI';
 import isExpired from './utils/isExpired';
@@ -48,6 +48,14 @@ function App() {
               element={
                 <PrivateRoute user={user}>
                   <Article />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/detail/:article_id"
+              element={
+                <PrivateRoute user={user}>
+                  <ArticleDetail />
                 </PrivateRoute>
               }
             />

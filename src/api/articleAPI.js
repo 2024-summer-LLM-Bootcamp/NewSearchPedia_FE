@@ -1,8 +1,8 @@
 import Api from './api.js';
 
 const articleAPI = {
-  getArticles(page = 0) {
-    return Api.get(`/api/articles?page=${page}`);
+  getArticles(page = 1, search = '') {
+    return Api.get(`/api/articles/?page=${page}&search=${search}`);
   },
   getArticle(articleId) {
     return Api.get(`/api/articles/detail/${articleId}`);
