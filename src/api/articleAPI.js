@@ -8,7 +8,7 @@ const articleAPI = {
     return Api.get(`/api/articles/detail/${articleId}`);
   },
   postArticle(data) {
-    return Api.post(`/api/articles/`, data);
+    return Api.post(`/api/articles/`, {query:data});
   },
 };
 

@@ -16,8 +16,9 @@ export default function TemporaryDrawer() {
   const fetchArticleList = async (page) => {
     try {
       const response = await articleAPI.getArticles(page);
-      setArticleList(response.results);
-      setTotalPages(Math.ceil(response.count / 10)); // assuming 10 items per page
+      console.log(response.data)
+      setArticleList(response.data.results || []);
+      setTotalPages(response.data.count? Math.ceil(response.data.count / 10):0); // assuming 10 items per page
     } catch (error) {
       console.error('Error fetching article list:', error);
     }

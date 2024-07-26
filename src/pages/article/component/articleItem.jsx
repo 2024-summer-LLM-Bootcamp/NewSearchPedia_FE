@@ -3,7 +3,6 @@ import { Card, CardContent, Typography, Grid } from '@mui/material';
 import Thumbnail from './thumbnail';
 
 function ArticleItem({ news_list, user_input, created_at, news_summary, encyc_list }) {
-
   return (
     <Grid container spacing={2}>
       <Grid item xs={6}>
