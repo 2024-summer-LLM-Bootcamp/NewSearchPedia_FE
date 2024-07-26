@@ -1,17 +1,31 @@
 import * as React from 'react';
-import { useState } from 'react';
-import { Box, Drawer, Button, List, Divider, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import { Inbox as InboxIcon, Menu as MenuIcon } from '@mui/icons-material';
-import Pagination from '@mui/material/Pagination';
+import { useState, useEffect } from 'react';
+import { Box, Drawer, Button, List, Divider, ListItem, ListItemText, Pagination } from '@mui/material';
+import { Menu as MenuIcon } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 import ArticleSearch from './articleSearch';
-import serverData from '../Data/serverData';
+import articleAPI from '../../../api/articleAPI';
 
 export default function TemporaryDrawer() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [articleList, setArticleList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const navigate = useNavigate();
 
-  // const handleChangePage = (event, newPage) => {
-  //   setCurrentPage(newPage);
-  // };
+  const fetchArticleList = async (page) => {
+    try {
+      const response = await articleAPI.getArticles(page);
+      setArticleList(response.results);
+      setTotalPages(Math.ceil(response.count / 10)); // assuming 10 items per page
+    } catch (error) {
+      console.error('Error fetching article list:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchArticleList(currentPage); // Fetch articles for the current page
+  }, [currentPage]);
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -21,13 +35,41 @@ export default function TemporaryDrawer() {
     event.stopPropagation();
   };
 
+  const handlePageChange = (event, page) => {
+    setCurrentPage(page);
+  };
+
+  const handleArticleClick = (id) => () => {
+    navigate(`/detail/${id}`); // Navigate to URL with article ID
+  };
+  
+  
+
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={preventClickPropagation}>
       <ArticleSearch />
-      {serverData.map((article) => (
-        <List>{article.user_input}</List>
-      ))}
+      <List>
+        {articleList.length > 0 ? (
+          articleList.map((article, index) => (
+            <ListItem key={index}>
+              <Button onClick={handleArticleClick(article.id)}>
+                <ListItemText primary={article.user_input} />
+              </Button>
+            </ListItem>
+          ))
+        ) : (
+          <ListItem>
+            <ListItemText primary="No articles available" />
+          </ListItem>
+        )}
+      </List>
       <Divider />
+      <Pagination
+        count={totalPages}
+        page={currentPage}
+        onChange={handlePageChange}
+        sx={{ display: 'flex', justifyContent: 'center', marginTop: 2 }}
+      />
     </Box>
   );
 

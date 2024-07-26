@@ -16,7 +16,7 @@ function ArticleItem({ news_list, user_input, created_at, news_summary, encyc_li
                 {news_list.map((news) => (
                   <li style={{ display: 'flex' }}>
                     {/* // eslint-disable-next-line  */}
-                    <Thumbnail src={news.thumbnail} alt={news.title} newsTitle={news.title} newsLink={news.link} date={news.date} />
+                    <Thumbnail src={news.thumbnail} newsTitle={news.title} newsLink={news.link} date={news.date} />
                   </li>
                 ))}
               </ol>
