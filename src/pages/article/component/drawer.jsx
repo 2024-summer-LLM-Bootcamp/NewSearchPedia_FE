@@ -9,9 +9,9 @@ import serverData from '../Data/serverData';
 export default function TemporaryDrawer() {
   const [open, setOpen] = React.useState(false);
 
-  const handleChangePage = (event, newPage) => {
-    setCurrentPage(newPage);
-  };
+  // const handleChangePage = (event, newPage) => {
+  //   setCurrentPage(newPage);
+  // };
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -25,9 +25,7 @@ export default function TemporaryDrawer() {
     <Box sx={{ width: 250 }} role="presentation" onClick={preventClickPropagation}>
       <ArticleSearch />
       {serverData.map((article) => (
-        <List>
-          {article.user_input}
-        </List>
+        <List>{article.user_input}</List>
       ))}
       <Divider />
     </Box>

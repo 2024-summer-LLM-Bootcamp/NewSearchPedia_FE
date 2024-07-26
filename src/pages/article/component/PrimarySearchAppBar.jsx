@@ -7,7 +7,7 @@ import TemporaryDrawer from './drawer';
 import auth from '../../../api/accountAPI';
 
 export default function PrimarySearchAppBar() {
-  const { user } = useUserStore();
+  const { user, resetUser } = useUserStore();
 
   const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ export default function PrimarySearchAppBar() {
       await auth.logout(); // 서버에서 세션을 종료하는 API 호출을 구현해야 합니다.
 
       // Zustand 스토어에서 사용자 상태를 리셋합니다.
-      useUserStore.getState().resetUser(); // useUserStore에서 직접 resetUser를 호출합니다.
+      resetUser(); // useUserStore에서 직접 resetUser를 호출합니다.
 
       // 로그인 페이지로 리디렉션합니다.
       // navigate('/login');
@@ -43,7 +43,7 @@ export default function PrimarySearchAppBar() {
       <AppBar position="static">
         <Toolbar>
           {/* <IconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }}> */}
-          {user.pk === 0 ? <></> : <TemporaryDrawer />}
+          {user.pk === 0 ? null : <TemporaryDrawer />}
           {/* </IconButton> */}
           <IconButton size="large" edge="end" color="inherit">
             <Button onClick={handleMainClick} sx={{ color: 'white' }}>
