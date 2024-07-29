@@ -16,9 +16,9 @@ export default function TemporaryDrawer() {
   const fetchArticleList = async (page) => {
     try {
       const response = await articleAPI.getArticles(page);
-      console.log(response.data)
+      console.log(response.data);
       setArticleList(response.data.results || []);
-      setTotalPages(response.data.count? Math.ceil(response.data.count / 10):0); // assuming 10 items per page
+      setTotalPages(response.data.count ? Math.ceil(response.data.count / 10) : 0); // assuming 10 items per page
     } catch (error) {
       console.error('Error fetching article list:', error);
     }
@@ -42,6 +42,7 @@ export default function TemporaryDrawer() {
 
   const handleArticleClick = (id) => () => {
     navigate(`/detail/${id}`); // Navigate to URL with article ID
+    setOpen(false);
   };
 
   const DrawerList = (
@@ -49,8 +50,8 @@ export default function TemporaryDrawer() {
       <ArticleSearch />
       <List>
         {articleList.length > 0 ? (
-          articleList.map((article, index) => (
-            <ListItem key={index}>
+          articleList.map((article) => (
+            <ListItem key={`article-${article.id}`}>
               <Button onClick={handleArticleClick(article.id)}>
                 <ListItemText primary={article.user_input} />
               </Button>
