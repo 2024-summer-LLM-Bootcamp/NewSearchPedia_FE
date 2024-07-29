@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Box } from '@mui/material';
-import { useParams } from 'react-router-dom';  // useParams를 사용하여 URL 매개변수 가져오기
+import { useParams } from 'react-router-dom'; // useParams를 사용하여 URL 매개변수 가져오기
 import articleAPI from '../../api/articleAPI';
 import ArticleItem from './component/articleItem';
 
 function ArticleDetail() {
   const [articleDetail, setArticleDetail] = useState(null);
-  const { article_id } = useParams();  // URL에서 article_id를 추출
+  const { article_id } = useParams(); // URL에서 article_id를 추출
 
   // articleId가 변경될 때마다 호출되는 useEffect
   useEffect(() => {
@@ -17,12 +17,15 @@ function ArticleDetail() {
   }, [article_id]);
 
   const fetchArticleDetail = async (articleId) => {
-    try {
-      const response = await articleAPI.getArticle(articleId);
-      setArticleDetail(response.article);
-    } catch (error) {
-      console.error('Error fetching article detail:', error);
-    }
+    articleAPI
+      .getArticle(articleId)
+      .then((response) => {
+        console.log('article detail', response.data);
+        setArticleDetail(response.data.article);
+      })
+      .catch((error) => {
+        console.error('Error fetching article detail:', error);
+      });
   };
 
   return (

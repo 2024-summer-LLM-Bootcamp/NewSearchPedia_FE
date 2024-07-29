@@ -7,11 +7,12 @@ import articleAPI from '../../api/articleAPI';
 import serverData from './Data/serverData';
 import Thumbnail from './component/thumbnail';
 import ArticleItem from './component/articleItem';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function Article() {
   const [inputValue, setInputValue] = useState('');
   const [queryResult, setQueryResult] = useState(null);
-
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
@@ -26,31 +27,46 @@ export default function Article() {
   const saveUserInput = (value) => {
     // 입력값이 비어있지 않은지 확인
     if (value.trim()) {
+      setIsLoading(true);
       fetchQueryResult(value);
       setInputValue('');
       // console.log(value);
     }
   };
   const fetchQueryResult = async (query) => {
-    try {
-      const response = await articleAPI.postArticle(query);
-      setQueryResult(response.article || {});
-    } catch (error) {
-      console.error('Error fetching article detail:', error);
-    }
+    articleAPI
+      .postArticle(query)
+      .then((response) => {
+        console.log('post result', response.data);
+        setQueryResult(response.data.article || {});
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching article detail:', error);
+      });
   };
 
+  useEffect(() => {
+    console.log('queryResult', queryResult);
+  }, [queryResult]);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      {queryResult && 
-      <ArticleItem
-        news_list={queryResult.news_list || []}
-        user_input={queryResult.user_input || ''}
-        created_at={new Date(queryResult.created_at).toLocaleString() || ''}
-        news_summary={queryResult.news_summary || ''}
-        encyc_list={queryResult.encyc_list || []}
-      />}
+      {!isLoading ? (
+        queryResult && (
+          <ArticleItem
+            news_list={queryResult.news_list || []}
+            user_input={queryResult.user_input || ''}
+            created_at={new Date(queryResult.created_at).toLocaleString() || ''}
+            news_summary={queryResult.news_summary || ''}
+            encyc_list={queryResult.encyc_list || []}
+          />
+        )
+      ) : (
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <CircularProgress />
+        </Box>
+      )}
       <Box
         sx={{
           minWidth: '50%',
